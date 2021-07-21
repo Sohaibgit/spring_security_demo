@@ -8,7 +8,8 @@ To access any resource we need to provide username and password.\
 **Implement Basic Auth Security**
 1. Create a class, annotate it with @Configuration and @EnableWebSecurity and extend WebSecurityConfigurerAdapter.
 2. Overrid configure(HttpSecurity http) and add below code.
-   ```
+ ```
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         // any request should be authenticated i.e user should provide username and password and mechanism should be basic auth
         // antMatchers --> to allow access to home page like index to all users without any username and password
@@ -18,10 +19,11 @@ To access any resource we need to provide username and password.\
                 .antMatchers("/", "index", "/css/*", "/js/*")
                 .permitAll()
                 .anyRequest()
-                .authenticated().
+                .authenticated()
                 .and()
                 .httpBasic();
-    }```
+    }
+```
 
 **Code Explaination**
 
