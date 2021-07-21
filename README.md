@@ -52,3 +52,30 @@ http.authorizeRequests("authorize the request")
         return new InMemoryUserDetailsManager(mariumUser);
     }
 ```
+**PasswordEncoder** \
+Spring Security uses password encoder by default to encode the password and also enforces us to use the same. \
+To create our own user we need to provide password encoder. Password Encoder is an interface and we must provide implementation of it. \
+Spring enforces us to use BCryptPasswordEncoder which is the most famous password encoder at this time.
+
+1. Create a configuration class and add below bean to it.
+
+```
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(10);
+    }
+```
+2. Then autowire this bean in ApplicationSecurityConfig and use it to encode the password like below. 
+```
+    @Override
+    @Bean
+    protected UserDetailsService userDetailsService() {
+        UserDetails mariumUser = User.builder()
+                .username("student")
+                .password(passwordEncoder.encode("student"))
+                .roles("STUDENT")
+                .build();
+
+        return new InMemoryUserDetailsManager(mariumUser);
+    }
+ ```
