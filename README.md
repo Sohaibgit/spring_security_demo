@@ -1,5 +1,5 @@
 # spring_security_demo
-**spring-boot-starter-security**
+**spring-boot-starter-security** \
 Just by adding spring security dependency, we get a default login page with username and password.
 To access any resource we need to provide username and password.\
 **username**: user \
@@ -24,6 +24,7 @@ To access any resource we need to provide username and password.\
     }```
 
 **Code Explaination**
+
 ```
 http.authorizeRequests("authorize the request")
 .antMatchers("/", "index", "/css/*", "/js/*")
@@ -31,4 +32,21 @@ http.authorizeRequests("authorize the request")
 .anyRequest("any request")
 .authenticated("should be authenticated")
 .and("and also")
-.httpBasic("mechanism should be basic auth");```
+.httpBasic("mechanism should be basic auth");
+```
+
+**Create a User**
+1. Override below method and annotate it with @Bean to create a user
+```
+    @Override
+    @Bean
+    protected UserDetailsService userDetailsService() {
+        UserDetails mariumUser = User.builder()
+                .username("student")
+                .password("student")
+                .roles("STUDENT")
+                .build();
+
+        return new InMemoryUserDetailsManager(mariumUser);
+    }
+```
