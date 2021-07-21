@@ -21,5 +21,7 @@ To access any resource we need to provide username and password.
                 .authenticated()
                 .and()
                 .httpBasic();
-    }
-```
+    }```
+
+**Code Explaination**
+http.authorizeRequests("authorize the request").anyRequest("any request").authenticated("should be authenticated").and("and also").httpBasic("mechanism should be basic auth");
