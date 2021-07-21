@@ -24,5 +24,5 @@ To access any resource we need to provide username and password.\
     }```
 
 **Code Explaination** \
-http.authorizeRequests("authorize the request").antMatchers("/", "index", "/css/*", "/js/*")
-                .permitAll("means above listed urls in antMatchers are now whitelisted means they are accessible without username and password").anyRequest("any request").authenticated("should be authenticated").and("and also").httpBasic("mechanism should be basic auth");
+http.authorizeRequests("authorize the request")\.antMatchers("/", "index", "/css/*", "/js/*")
+                \.permitAll("means above listed urls in antMatchers are now whitelisted means they are accessible without username and password")\.anyRequest("any request")\.authenticated("should be authenticated")\.and("and also")\.httpBasic("mechanism should be basic auth");
