@@ -23,7 +23,7 @@ To access any resource we need to provide username and password.\
                 .httpBasic();
     }```
 
-**Code Explaination** \
+**Code Explaination**
 ```
 http.authorizeRequests("authorize the request")
 .antMatchers("/", "index", "/css/*", "/js/*")
