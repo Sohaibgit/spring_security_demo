@@ -1,5 +1,7 @@
 package com.spring.security.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,11 +14,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.Set;
+
 import static com.spring.security.security.ApplicationUserRoles.*;
 
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationSecurityConfig.class);
+
 
     private PasswordEncoder passwordEncoder;
 
@@ -31,7 +38,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         // antMatchers --> to allow access to home page like index to all users without any username and password
         // antMatchers("/api/**").hasRole(STUDENT.name()) --> Only allow user who have a role of STUDENT to access this API
 
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/api/**").hasRole(STUDENT.name())
                 .anyRequest()
@@ -60,7 +68,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("password123"))
                 .roles(ADMINTRAINEE.name()) // ROLE_ADMINTRAINEE
                 .build();
-
 
         return new InMemoryUserDetailsManager(
                 studentUser,

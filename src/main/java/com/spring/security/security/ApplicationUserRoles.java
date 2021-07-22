@@ -20,4 +20,11 @@ public enum ApplicationUserRoles {
     public Set<ApplicationUserPermissions> getPermissions() {
         return permissions;
     }
+
+    @Override
+    public String toString() {
+        return "ApplicationUserRoles{" +
+                "permissions=" + permissions +
+                '}';
+    }
 }

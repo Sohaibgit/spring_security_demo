@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/students")
+@RequestMapping("api/v1/students")
 public class StudentController {
 
     private static final List<Student> STUDENTS = new ArrayList<>(
