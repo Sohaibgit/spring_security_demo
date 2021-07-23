@@ -79,3 +79,54 @@ Spring enforces us to use BCryptPasswordEncoder which is the most famous passwor
         return new InMemoryUserDetailsManager(mariumUser);
     }
  ```
+
+**Role Based Authentication** \
+For Role based authentication, Follow these steps.
+1. Create an Enum ApplicationUserRoles.
+```
+public enum ApplicationUserRoles {
+    STUDENT,
+    ADMIN;
+}  
+```
+2. In ApplicationSecurityConfig, add below code to create two users with roles.
+```
+@Override
+    @Bean
+    protected UserDetailsService userDetailsService() {
+        UserDetails studentUser = User.builder()
+                .username("student")
+                .password(passwordEncoder.encode("student"))
+                .roles(STUDENT.name()) // ROLE_STUDENT
+                .build();
+
+        UserDetails adminUser = User.builder()
+                .username("admin")
+                .password(passwordEncoder.encode("admin"))
+                .roles(ADMIN.name()) // ROLE_ADMIN
+                .build();
+
+        return new InMemoryUserDetailsManager(
+                studentUser,
+                adminUser
+        );
+    }
+```
+3. Add below code in configure method to only allow users with role STUDENT to access the API.
+```
+ @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // any request should be authenticated i.e user should provide username and password and mechanism should be basic auth
+        // antMatchers --> to allow access to home page like index to all users without any username and password
+        // antMatchers("/api/**").hasRole(STUDENT.name()) --> Only allow user who have a role of STUDENT to access this API
+
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/api/**").hasRole(STUDENT.name())
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
+    }
+```
