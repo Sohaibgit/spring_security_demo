@@ -1,5 +1,5 @@
 # spring_security_demo
-**Form Based Authentication** \
+**Form Based Authentication**
 1. Add below code in configure method.
  ```
  @Override
@@ -19,7 +19,7 @@
                 .loginPage("/login").permitAll();
     }
  ```
- .formLogin() to enable form based authentication.
+ .formLogin() to enable form based authentication. \
  .loginPage("/login").permitAll() to redirect to custom login page
  
  2. Add below dependancy.
@@ -42,4 +42,19 @@ public class TemplateController {
     }
 }
 ```
+**Redirect After Login Success to Some Page**
+1. Create a method for view in TemplateController.
+```
+@GetMapping("courses")
+    public String getCourses(){
+        return "courses";
+    }
+```
+2. Create a courses html page
+3. Add below code in configure method after permit all like below.
+```
+ .loginPage("/login").permitAll()
+ .defaultSuccessUrl("/courses", true);
+```
+
   
