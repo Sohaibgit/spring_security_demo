@@ -8,15 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.spring.security.security.ApplicationUserRoles.STUDENT;
+import static com.spring.security.security.ApplicationUserRoles.*;
 
 @Repository("fake")
-public class ApplicationUserDaoImpl implements ApplicationUserDao{
+public class FakeApplicationUserDaoImpl implements ApplicationUserDao {
 
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ApplicationUserDaoImpl(PasswordEncoder passwordEncoder) {
+    public FakeApplicationUserDaoImpl(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -41,7 +41,7 @@ public class ApplicationUserDaoImpl implements ApplicationUserDao{
                         ),
 
                 new ApplicationUserDetails(
-                        STUDENT.getGrantedAuthorities(),
+                        ADMIN.getGrantedAuthorities(),
                         passwordEncoder.encode("admin"),
                         "admin",
                         true,
@@ -51,7 +51,7 @@ public class ApplicationUserDaoImpl implements ApplicationUserDao{
                 ),
 
                 new ApplicationUserDetails(
-                        STUDENT.getGrantedAuthorities(),
+                        ADMINTRAINEE.getGrantedAuthorities(),
                         passwordEncoder.encode("admintrainee"),
                         "admintrainee",
                         true,

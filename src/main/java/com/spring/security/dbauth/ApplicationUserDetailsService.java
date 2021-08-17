@@ -1,5 +1,6 @@
 package com.spring.security.dbauth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +12,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 
     private final ApplicationUserDao applicationUserDao;
 
+    @Autowired
     public ApplicationUserDetailsService(@Qualifier("fake") ApplicationUserDao applicationUserDao) {
         this.applicationUserDao = applicationUserDao;
     }
