@@ -45,7 +45,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/courses", true)
+                .and()
+                .rememberMe() // defaults to 2 weeks
+                .tokenValiditySeconds(60)
+                .key("thisismykey");
     }
 
     @Override
