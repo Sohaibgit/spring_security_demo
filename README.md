@@ -1,6 +1,6 @@
 # spring_security_demo
-**Database Authentication** \
-1. Create a class and extend UserDetails class.
+**Database Authentication**
+1. Create a class and implement the UserDetails interface. This class represents a User.
 ```
 public class ApplicationUserDetails implements UserDetails {
     private final Set<? extends GrantedAuthority> grantedAuthorities;
