@@ -1,4 +1,13 @@
 # spring_security_demo
+
+# Learning Path
+**For Complete Understanding, Read through docs and code of all branches in below order** \
+1. role_based_authentication
+2. permission_based_authentication
+3. database_authentication
+4.  java_json_web_tokens
+
+
 **Database Authentication**
 1. Create a class and implement the UserDetails interface. This class represents a User.
 ```
