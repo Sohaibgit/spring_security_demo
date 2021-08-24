@@ -1,4 +1,13 @@
 # spring_security_demo
+
+# Learning Path
+**For Complete Understanding, Read through docs and code of all branches in below order** \
+1. role_based_authentication
+2. permission_based_authentication
+3. database_authentication
+4.  java_json_web_tokens
+
+
 **spring-boot-starter-security** \
 Just by adding spring security dependency, we get a default login page with username and password.
 To access any resource we need to provide username and password.\
