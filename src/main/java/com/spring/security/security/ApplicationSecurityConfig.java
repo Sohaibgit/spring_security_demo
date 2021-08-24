@@ -1,6 +1,7 @@
 package com.spring.security.security;
 
 import com.spring.security.dbauth.ApplicationUserDetailsService;
+import com.spring.security.jwt.JwtTokenVerifier;
 import com.spring.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Because Tokens are stateless
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager())) // Filters authenticate requests before accessing resources
+                .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/api/**").hasRole(STUDENT.name())

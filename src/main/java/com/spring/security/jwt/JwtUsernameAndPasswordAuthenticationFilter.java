@@ -41,6 +41,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
             throw new RuntimeException(e);
         }
 
+        // validate username and password
         return authenticationManager.authenticate(authentication);
     }
 
@@ -53,13 +54,13 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
         String key = "secretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkey"; // key should be very long
         String token = Jwts.builder()
-                .setSubject(authResult.getName())
-                .claim("authorities", authResult.getAuthorities()) // body
-                .setIssuedAt(new Date())
-                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
-                .signWith(Keys.hmacShaKeyFor(key.getBytes())) // signature
+                .setSubject(authResult.getName()) // add sub to payload
+                .claim("authorities", authResult.getAuthorities()) // adding authorities to payload
+                .setIssuedAt(new Date()) // token issued at date
+                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(1))) // token expiration date
+                .signWith(Keys.hmacShaKeyFor(key.getBytes())) // signature key
                 .compact();
 
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("Authorization", "Bearer " + token); // add token to response header
     }
 }
