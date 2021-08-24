@@ -1,6 +1,6 @@
 # spring_security_demo
-**Implement Java JWT**
-**Validating Credentials and returning Token to client in Response Header**
+**Implement Java JWT** \
+**Validating Credentials and returning Token to client in Response Header** \
 1. Add below depedencies in pom.xml
 ```
 <dependency>
