@@ -7,6 +7,22 @@
 3. database_authentication
 4.  java_json_web_tokens
 
+**What is JWT**
+JWT is a way between two applications to communicate. It is mostly used for authorization. \
+Client sends credentials, server authenticate the user and sends a token to user/client. Client then sends that token to server to access the resource. It checks the token if it is valid and if it is, it will check the permissions, if the client have the specific permission to access that resource then it will give back the resoucre.
+
+**Authentication**
+Verifies you are who you say you are -> e.g username and password \
+
+Common Methods.
+1. Login Form
+2. HTTP authentication
+3. Custom auth. method
+
+**Authorization**
+Decides if you have a permission to access a resource.
+E.g for ADMIN application looks different and ADMIN have more permissions and he can do more things as compared to other users
+
 **Implement Java JWT** \
 **Validating Credentials and returning Token to client in Response Header** \
 1. Add below depedencies in pom.xml
